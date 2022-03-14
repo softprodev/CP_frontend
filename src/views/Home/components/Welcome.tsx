@@ -21,7 +21,7 @@ const Welcome = () => {
             <h1 className="welcome__title c-title c-title--small wow animate__animated animate__fadeInUp" data-wow-duration="1.25s">welcome to <span>the club</span></h1>
             <p className="welcome__desc c-desc wow animate__animated animate__fadeInUp" data-wow-duration="1.25s">CP represents the first fitness brand that is merging into the digital world. <strong>The vision is ultimately a community governed brand that physically, mentally & financially enrichs it’s tokenholders. </strong>The first of many benefits is access to Club Physique where token holders can vote on future flavors, taste test future R&D creations and access a 20% lifetime discount but the road map gets even more exciting.</p>
             <div className="welcome__btn c-btn__wrapper wow animate__animated animate__fadeInUp" data-wow-duration="1.25s">
-              <a className="c-btn" href='https://discord.gg/WP8RNZkx' rel="noreferrer" target="_blank">
+              <a className="c-btn" href='https://discord.com/invite/clubphysique' rel="noreferrer" target="_blank">
                 <u className="c-btn__mask">Join The Community</u><span>Join The Community</span>
               </a>
             </div>

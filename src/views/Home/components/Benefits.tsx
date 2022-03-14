@@ -86,7 +86,7 @@ const Benefits = () => {
             </li>
           </ul>
           <div className="c-btn__wrapper c-btn__wrapper--center wow animate__animated animate__fadeInUp" data-wow-duration="1.25s">
-            <a className="c-btn" href="https://discord.gg/WP8RNZkx" rel="noreferrer" target="_blank">
+            <a className="c-btn" href="https://discord.com/invite/clubphysique" rel="noreferrer" target="_blank">
               <u className="c-btn__mask">Join The Community</u>
               <span>Join The Community</span></a></div>
         </div>

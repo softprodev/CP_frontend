@@ -79,7 +79,7 @@ const Header = () => {
               <img className="header__logo" src="img/logo.png" srcSet="img/logo@2x.png 2x" alt="" />
             </div>
             <div className="c-btn__wrapper c-btn__wrapper--center">
-              <a className="c-btn" href="https://discord.gg/WP8RNZkx" rel="noreferrer" target="_blank">
+              <a className="c-btn" href="https://discord.com/invite/clubphysique" rel="noreferrer" target="_blank">
                 <u className="c-btn__mask">
                   <i className="icon-font icon-discord" />
                   Join Now

@@ -4,7 +4,7 @@ import { Card, Flex, Text, Button } from 'penguinfinance-uikit2'
 
 const CommunityTools = () => {
   const handleMoveToDiscord = () => {
-    window.open('https://discord.gg/EUFSzWHUyb', '_blank');
+    window.open('https://discord.com/invite/clubphysique', '_blank');
   };
 
   return (
@@ -238,7 +238,7 @@ const Actions = styled(Flex)`
   justify-content: center;
   margin-top: 24px;
 `
-const StyledButton = styled(Button)<{ type: string }>`
+const StyledButton = styled(Button) <{ type: string }>`
   background: ${({ type }) => type === 'primary' && '#EB5757'};
   background: ${({ type }) => type === 'secondary' && '#01CBF3'};
   color: ${({ type }) => type === 'primary' && '#ffffff'};

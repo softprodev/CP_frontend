@@ -60,7 +60,7 @@ const config = {
       value: 'discord',
       icon: 'discord.svg',
       mobileIcon: 'discord-black.svg',
-      href: 'https://discord.gg/EUFSzWHUyb',
+      href: 'https://discord.com/invite/clubphysiqueb',
     },
     // {
     //   name: 'instagram',

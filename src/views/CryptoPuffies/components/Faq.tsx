@@ -106,7 +106,7 @@ const Faq = () => {
                 <SecondSentence>{`FAQs `}</SecondSentence>
               </FaqHeaderTitle>
               <FaqHeaderDescription>
-                If you cannot find answer to your question below, make sure to <a href='https://discord.gg/EUFSzWHUyb' target='_blank' rel="noreferrer">join our Discord</a> and ask a Puffy Mod!
+                If you cannot find answer to your question below, make sure to <a href='https://discord.com/invite/clubphysique' target='_blank' rel="noreferrer">join our Discord</a> and ask a Puffy Mod!
               </FaqHeaderDescription>
             </FaqHeaderCard>
             <FaqPuffyImgWrapper>

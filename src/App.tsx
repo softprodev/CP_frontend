@@ -83,7 +83,7 @@ const App: React.FC = () => {
             <section className="menu" id="menu" mobile-block-js="mobile-block-js">
               <div>
                 <nav className="header__nav"><a className="is-active" href="#roadmap">ROADMAP</a><a href="#club">Club Physique</a><a href="#benefits">BENEFITS</a></nav>
-                <div className="c-btn__wrapper"><a className="c-btn" href="https://discord.gg/WP8RNZkx">
+                <div className="c-btn__wrapper"><a className="c-btn" href="https://https://discord.com/invite/clubphysique">
                   <u className="c-btn__mask"><i className="icon-font icon-discord" />Join Now
                   </u><span><i className="icon-font icon-discord" />Join Now</span></a><a className="c-btn" href="/">
                     <u className="c-btn__mask">Connect Wallet
