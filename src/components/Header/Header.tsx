@@ -6,16 +6,10 @@ import { Flex, ResetCSS } from 'penguinfinance-uikit2'
 import SvgIcon from 'components/SvgIcon'
 import UnlockButton from 'components/UnlockButton'
 
-import DiscordButton from 'components/DiscordButton'
 
 import UserBlock from 'components/UserBlock'
 import useWindowSize from 'hooks/useWindowSize';
 import config from './config'
-
-import 'css/app.css'
-import 'css/app.min.css'
-
-
 
 
 const Header = () => {

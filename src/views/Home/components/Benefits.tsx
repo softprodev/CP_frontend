@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Flex, Text, Card, Button } from 'penguinfinance-uikit2'
-import CallActionButton from 'components/CallActionButton'
+import React from 'react'
 
 const Benefits = () => {
   return (

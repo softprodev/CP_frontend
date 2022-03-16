@@ -3,19 +3,12 @@ import { Router, Route, Switch, useLocation } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { useFetchPublicData } from 'state/hooks'
-import GlobalStyle from 'style/Global'
 import PageLoader from 'components/PageLoader'
 import CurrentBlockWrapper from 'components/CurrentBlockWrapper'
 import Header from 'components/Header'
-import Footer from 'components/Footer/Footer'
-import BackgroundMusic from 'components/BackgroundMusic'
 import usePersistConnect from 'hooks/usePersistConnect'
 import useBackgroundMusic from 'hooks/useBackgroundMusic';
 import history from './routerHistory'
-// import '${process.env.PUBLIC_URL}/css/app.css'
-// import 'css/app.min.css'
-import 'css/app.css'
-import 'css/app.min.css'
 
 const MintPuffies = lazy(() => import('./views/MintPuffies'))
 const CryptoPuffies = lazy(() => import('./views/CryptoPuffies'))
@@ -79,7 +72,7 @@ const App: React.FC = () => {
         <BackgroundImage />
         <Switch>
           <Route path="/" exact>
-            <Home setMusicVolume={setMusicVolume} IsAutoPlay={IsAutoPlay} />
+            <Home />
             <section className="menu" id="menu" mobile-block-js="mobile-block-js">
               <div>
                 <nav className="header__nav"><a className="is-active" href="#roadmap">ROADMAP</a><a href="#club">Club Physique</a><a href="#benefits">BENEFITS</a></nav>

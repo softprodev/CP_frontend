@@ -1,7 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Card, Flex, Text } from 'penguinfinance-uikit2'
-
 
 const CPTogether = () => {
     return (
