@@ -41,12 +41,8 @@ const RIGHT_IMAGES = [
   { id: 7, image: 'right7.jpg' },
 ]
 
-interface Props {
-  setMusicVolume: (musicVolume: number) => void;
-  volumeValue: number;
-}
 
-const MintPuffies: React.FC<Props> = ({ setMusicVolume, volumeValue }) => {
+const MintPuffies = () => {
 
   const [rarity, setRarity] = useState(1);
   const [minting, setMinting] = useState(false);
@@ -72,29 +68,6 @@ const MintPuffies: React.FC<Props> = ({ setMusicVolume, volumeValue }) => {
   const tokenPrice = isPresale ? (mintPrice - goldenTicketDiscount) : mintPrice;
 
 
-  const handleMusicVolume = () => {
-    if (volumeValue === 0.01) {
-      setMusicVolume(0.1);
-    } else if (volumeValue === 0.1) {
-      setMusicVolume(0);
-    } else if (volumeValue === 0) {
-      setMusicVolume(0.01);
-    }
-  }
-
-  const renderMusicButton = (): string => {
-    switch (volumeValue) {
-      case 0.01:
-        return `${process.env.PUBLIC_URL}/images/cryptopuffies/music/volume_0.png`;
-      case 0.1:
-        return `${process.env.PUBLIC_URL}/images/cryptopuffies/music/volume_2.png`;
-      // case 1:
-      //   return `${process.env.PUBLIC_URL}/images/cryptopuffies/music/volume_2.png`;
-      case 0:
-      default:
-        return `${process.env.PUBLIC_URL}/images/cryptopuffies/music/volume_mute.png`;
-    }
-  };
   const handleMinusRarity = () => {
     if (rarity > 1) {
       setRarity(prev => prev - 1);
@@ -165,13 +138,7 @@ const MintPuffies: React.FC<Props> = ({ setMusicVolume, volumeValue }) => {
         }
         <PuffyPlayer alignItems='center' mt='20px'>
           <PuffyPartyText>Let’s PuggleParty! - Les Puffielers</PuffyPartyText>
-          <Flex>
-            <div onClick={handleMusicVolume} aria-hidden="true">
-              <PlayerImg
-                src={renderMusicButton()}
-                alt='volume' />
-            </div>
-          </Flex>
+
         </PuffyPlayer>
       </Flex>
     )

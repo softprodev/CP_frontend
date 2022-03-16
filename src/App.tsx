@@ -7,7 +7,6 @@ import PageLoader from 'components/PageLoader'
 import CurrentBlockWrapper from 'components/CurrentBlockWrapper'
 import Header from 'components/Header'
 import usePersistConnect from 'hooks/usePersistConnect'
-import useBackgroundMusic from 'hooks/useBackgroundMusic';
 import history from './routerHistory'
 
 const MintPuffies = lazy(() => import('./views/MintPuffies'))
@@ -35,39 +34,16 @@ const ScrollToTop = () => {
   return null
 }
 
-const MINT_PARTY_AUDIO_URL = 'https://res.cloudinary.com/dbyunrpzq/video/upload/v1644311286/CryptoPuffies_Track_MASTER_lotgfy.mp3';
-
 const App: React.FC = () => {
-  const [, setVolume] = useBackgroundMusic(MINT_PARTY_AUDIO_URL);
-  const [volumeValue, setVolumeValue] = useState(0);
-  const [IsAutoPlay, setIsAutoPlay] = useState(false);
 
-  const setMusicVolume = (volume: number) => {
-    setIsAutoPlay(true);
-    setVolumeValue(volume);
-    setVolume(volume);
-  }
   useFetchPublicData()
   usePersistConnect()
 
 
-  useEffect(() => {
-    const onScroll: EventListener = (event: Event) => { // <-- DOM-EventListener
-      // console.log("Scrolling event in App", event.target);
-    };
-
-    const win: Window = window;   // <-- DOM-Window, extends DOM-EventTarget
-    win.addEventListener("scroll", onScroll);
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <Router history={history}>
-      {/* <GlobalStyle /> */}
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
-        {/* <BackgroundMusic setMusicVolume={setMusicVolume} volumeValue={volumeValue} /> */}
         <Header />
         <BackgroundImage />
         <Switch>
@@ -85,17 +61,16 @@ const App: React.FC = () => {
             </section>
           </Route>
           <Route path="/puffy" exact>
-            <CryptoPuffies setMusicVolume={setMusicVolume} IsAutoPlay={IsAutoPlay} />
+            <CryptoPuffies />
           </Route>
           <Route path="/mint" exact>
-            <MintPuffies setMusicVolume={setMusicVolume} volumeValue={volumeValue} />
+            <MintPuffies />
           </Route>
           <Route path="/my-puffies" exact>
             <MyPuffies />
           </Route>
           <Route component={NotFound} />
         </Switch>
-        {/* <Footer /> */}
       </Suspense>
       <CurrentBlockWrapper />
     </Router>

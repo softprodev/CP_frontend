@@ -15,24 +15,14 @@ import MyPuffies from './components/MyPuffies'
 import Faq from './components/Faq'
 import BuySection from './components/BuySection';
 
-interface Props {
-  setMusicVolume: (musicVolume: number) => void;
-  IsAutoPlay: boolean;
-}
 
-const CryptoPuffies: React.FC<Props> = ({ setMusicVolume, IsAutoPlay }) => {
-  // const handleMusicVolume = () => {
-  //   if (!IsAutoPlay) {
-  //     console.log('currentVolume : ', '0.01');
-  //     setMusicVolume(0.01);
-  //   }
-  // }
+const CryptoPuffies = () => {
 
   return (
     <>
       <StyledPage>
         <TopBanner />
-        <BuySection setMusicVolume={setMusicVolume} IsAutoPlay={IsAutoPlay} />
+        <BuySection />
         <AContainer>
           <div id='about'>
             <WhatCryptopuffies />

@@ -7,7 +7,7 @@ import { useCryptoPuffies } from 'state/hooks'
 import { useWeb3React } from '@web3-react/core'
 // import useAuth from 'hooks/useAuth'
 
-const TopBanner = ({ setMusicVolume, IsAutoPlay }) => {
+const TopBanner = () => {
   const history = useHistory();
   const { account } = useWeb3React();
   // const goldenTickets = useUserGoldenTickets(account);
@@ -20,7 +20,6 @@ const TopBanner = ({ setMusicVolume, IsAutoPlay }) => {
   const isPresale = currentDate >= (startDate - earlyMintingWindow * 1000) && currentDate < startDate;
 
   const handleMintPuffy = () => {
-    handleMusicVolume();
     history.push('/mint');
   };
 
@@ -28,12 +27,6 @@ const TopBanner = ({ setMusicVolume, IsAutoPlay }) => {
   //   return `<div><p>Please connect your wallet view your Golden Ticket balance.</p></div>`
   // }
 
-  const handleMusicVolume = () => {
-    if (!IsAutoPlay) {
-      // console.log('currentVolume : ', '0.01');
-      setMusicVolume(0.01);
-    }
-  }
 
   return (
     <Section>
