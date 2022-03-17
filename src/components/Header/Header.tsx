@@ -9,18 +9,18 @@ import UnlockButton from 'components/UnlockButton'
 
 import UserBlock from 'components/UserBlock'
 import useWindowSize from 'hooks/useWindowSize';
-import config from './config'
+import items from './items'
 
 interface Props {
-  fetchContractInfo: () => void;
+  walletConnection: () => void;
   walletButtonCaption: string;
 }
 
-const Header: React.FC<Props> = ({ fetchContractInfo, walletButtonCaption }) => {
+const Header: React.FC<Props> = ({ walletConnection, walletButtonCaption }) => {
   const windowSize = useWindowSize();
   const [activeSection, setActiveSection] = useState('cryptopuffies')
   const [viewMenu, setViewMenu] = useState(false)
-  const { menuEntries, socialLinks } = config
+  const { menuEntries, socialLinks } = items
   const location = useLocation();
   const isHomepage = location.pathname === '/';
   const history = useHistory();
@@ -30,7 +30,7 @@ const Header: React.FC<Props> = ({ fetchContractInfo, walletButtonCaption }) => 
   const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log("Connec button clicked");
-    fetchContractInfo();
+    walletConnection();
   };
   const onClickMenuItem = row => async event => {
     event.preventDefault();

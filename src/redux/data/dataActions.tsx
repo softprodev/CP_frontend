@@ -27,22 +27,25 @@ function fetchData() {
     return async (dispatch) => {
         dispatch(fetchDataRequest());
         try {
-            console.log("fetchData2");
+            console.log("fetchData2", store
+                .getState()
+                .blockchain.smartContract.methods);
 
             const totalSupply = await store
                 .getState()
                 .blockchain.smartContract.methods.totalSupply()
                 .call();
-            const cost = await store
-                .getState()
-                .blockchain.smartContract.methods.cost()
-                .call();
-            console.log("fetchData3");
+
+            // const cost = await store
+            //     .getState()
+            //     .blockchain.smartContract.methods.cost()
+            //     .call();
+            // console.log("fetchData3", cost);
 
             dispatch(
                 fetchDataSuccess({
                     totalSupply,
-                    cost,
+                    // cost,
                 })
             );
         } catch (err) {

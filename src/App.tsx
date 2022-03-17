@@ -19,6 +19,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import fetchData from "./redux/data/dataActions";
 
 import history from './routerHistory'
+// import config from 'components/Header/config'
 
 
 
@@ -134,6 +135,13 @@ const App: React.FC = () => {
     setMintAmount(newMintAmount);
   };
 
+
+  const walletConnection = () => {
+    if (!claimingNft) {
+      dispatch(connect());
+    }
+    getData();
+  };
   const fetchContractInfo = () => {
     if (claimingNft) {
       claimNFTs();
@@ -223,11 +231,11 @@ const App: React.FC = () => {
     <Router history={history}>
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
-        <Header fetchContractInfo={fetchContractInfo} walletButtonCaption={walletButtonCaption} />
+        <Header walletConnection={walletConnection} walletButtonCaption={walletButtonCaption} />
         <BackgroundImage />
         <Switch>
           <Route path="/" exact>
-            <Home totalSupply={data.totalSupply} cost={data.cost} fetchContractInfo={fetchContractInfo} mintButtonCaption={mintButtonCaption} />
+            <Home totalSupply={data.totalSupply} cost={CONFIG.DISPLAY_COST} fetchContractInfo={fetchContractInfo} mintButtonCaption={mintButtonCaption} />
             <section className="menu" id="menu" mobile-block-js="mobile-block-js">
               <div>
                 <nav className="header__nav"><a className="is-active" href="#roadmap">ROADMAP</a><a href="#club">Club Physique</a><a href="#benefits">BENEFITS</a></nav>

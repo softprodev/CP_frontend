@@ -1,4 +1,4 @@
-const config = {
+const items = {
   menuEntries: [
 
     {
@@ -17,34 +17,6 @@ const config = {
       href: 'benefits',
     },
 
-
-
-    // {
-    //   label: 'Mint',
-    //   value: 'mint',
-    //   href: '/mint',
-    // },
-    // {
-    //   label: 'My Puffies',
-    //   value: 'my-puffies',
-    //   href: '/my-puffies',
-    // },
-
-    // {
-    //   label: 'CLUB PHYSIQUE',
-    //   value: 'about',
-    //   href: 'about',
-    // },
-    // {
-    //   label: 'Roadmap',
-    //   value: 'roadmap',
-    //   href: 'roadmap',
-    // },
-    // {
-    //   label: 'FAQs',
-    //   value: 'faqs',
-    //   href: 'faqs',
-    // },
   ],
 
   socialLinks: [
@@ -71,4 +43,4 @@ const config = {
     // },
   ],
 }
-export default config
+export default items
