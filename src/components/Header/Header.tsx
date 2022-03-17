@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory, useLocation, Link } from 'react-router-dom'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
-import { Flex, ResetCSS } from 'penguinfinance-uikit2'
+import { Flex, ResetCSS, Button } from 'penguinfinance-uikit2'
 import SvgIcon from 'components/SvgIcon'
 import UnlockButton from 'components/UnlockButton'
 
@@ -11,8 +11,12 @@ import UserBlock from 'components/UserBlock'
 import useWindowSize from 'hooks/useWindowSize';
 import config from './config'
 
+interface Props {
+  fetchContractInfo: () => void;
+  walletButtonCaption: string;
+}
 
-const Header = () => {
+const Header: React.FC<Props> = ({ fetchContractInfo, walletButtonCaption }) => {
   const windowSize = useWindowSize();
   const [activeSection, setActiveSection] = useState('cryptopuffies')
   const [viewMenu, setViewMenu] = useState(false)
@@ -22,6 +26,12 @@ const Header = () => {
   const history = useHistory();
   const { account } = useWeb3React();
 
+
+  const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    console.log("Connec button clicked");
+    fetchContractInfo();
+  };
   const onClickMenuItem = row => async event => {
     event.preventDefault();
     setActiveSection(row.value)
@@ -82,9 +92,20 @@ const Header = () => {
                   Join Now
                 </span>
               </a>
-              <a className="c-btn" href="/">
-                <u className="c-btn__mask">Connect Wallet
-                </u><span>Connect Wallet</span></a></div>
+              {/* <a className="c-btn" href="/">
+                <u className="c-btn__mask">
+                  Connect Wallet
+                </u>
+                <span>{walletButtonCaption}
+                </span>
+              </a> */}
+              {/* <div className="c-btn__wrapper"> */}
+              <WalletButton onClick={buttonHandler} className="c-btn" type="button">
+                <u className="c-btn__mask">{walletButtonCaption}</u><span>{walletButtonCaption}</span>
+              </WalletButton>
+              {/* </div> */}
+
+            </div>
           </div>
         </div>
       </div>
@@ -194,8 +215,41 @@ const Header = () => {
     // </Section>
   )
 }
+const WalletButton = styled.button`
 
 
+outline: none;
+  text-decoration: none;
+
+margin-left: 20px !important;
+background-color: transparent;
+// outline: none;
+// cursor: pointer;
+// position: relative;
+// display: -webkit-box;
+// display: -ms-flexbox;
+// display: flex;
+// -webkit-box-align: center;
+//     -ms-flex-align: center;
+//         align-items: center;
+// -webkit-box-pack: center;
+//     -ms-flex-pack: center;
+//         justify-content: center;
+// width: 100%;
+// max-width: 250px;
+// height: 60px;
+// padding: 0 20px;
+// margin: 0;
+// border-radius: 0;
+// border: 1px solid #FF871C;
+// -webkit-box-shadow: 0px 5px 21px 0px rgba(255, 81, 28, 0.29);
+//         box-shadow: 0px 5px 21px 0px rgba(255, 81, 28, 0.29);
+// -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
+// transition: -webkit-box-shadow 0.3s ease-in-out;
+// -o-transition: box-shadow 0.3s ease-in-out;
+// transition: box-shadow 0.3s ease-in-out;
+// transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
+`;
 
 const HeaderLogoContainer = styled(Flex)`
                     transform: translate(0%, 15%);

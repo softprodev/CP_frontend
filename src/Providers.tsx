@@ -9,8 +9,9 @@ import { RefreshContextProvider } from 'contexts/RefreshContext'
 import { ToastsProvider } from 'contexts/ToastsContext'
 import { SettingContextProvider } from 'contexts/SettingContext'
 import { MintingTokensContextProvider } from 'contexts/MintingTokensContext'
-import store from 'state'
+// import store from 'state'
 import { getLibrary } from 'utils/web3React'
+import store from "./redux/store";
 
 const Providers: React.FC = ({ children }) => {
   return (
