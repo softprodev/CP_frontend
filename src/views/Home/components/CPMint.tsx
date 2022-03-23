@@ -1,6 +1,10 @@
-import React, { MouseEvent } from 'react'
-import { Button } from 'penguinfinance-uikit2'
+import React from 'react'
 import styled from 'styled-components'
+import { useEthers, useEtherBalance } from "@usedapp/core";
+
+import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
+import AccountModal from "../../../components/AccountModal";
+
 
 interface Props {
     totalSupply: number;
@@ -11,52 +15,22 @@ interface Props {
 
 const CPMint: React.FC<Props> = ({ totalSupply, cost, fetchContractInfo, mintButtonCaption }) => {
 
+    const { activateBrowserWallet, account } = useEthers();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+
     const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        console.log("Mint button clicked");
         event.preventDefault();
-        console.log("Connec button clicked");
         fetchContractInfo();
     };
 
-    const handleMouseEvent = (e: MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        // Do something
-    };
-
-    const divClickedHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const div = event.currentTarget;
-        console.log(
-            "Element name: ",
-            div.tagName,
-            "Width: ",
-            div.clientWidth,
-            "Height: ",
-            div.clientHeight
-        );
-    };
-
-    const onClickMenuItem = row => async event => {
-        event.preventDefault();
-        // setActiveSection(row.value)
-
-        // if (row.href === '/mint' || row.href === '/my-puffies') {
-        //   history.push(row.href);
-        // } else {
-        //   await history.push('/');
-        //   const menuElement = document.getElementById(row.href);
-        //   if (menuElement) {
-        //     menuElement.scrollIntoView({ behavior: "smooth" });
-        //   }
-        // }
-
-        // if (viewMenu) {
-        //   setViewMenu(false);
-        // }
-    }
     return (
         <section className="get" id="get">
             <div className="c-grid">
                 <div className="get__wrapper">
                     <div className="get__wrapper-left"><img className="wow animate__animated animate__fadeInUp" data-wow-duration="1.25s" src="img/sadiknft.gif" srcSet="img/sadiknft.gif" alt="" /></div>
+                    {/* <div className="get__wrapper-left"><img className="wow animate__animated animate__fadeInUp" data-wow-duration="1.25s" src="img/img-get@2x.png" srcSet="img/img-get@2x.png" alt="" /></div> */}
                     <div className="get__wrapper-right">
                         <div>
                             <div className="get__header wow animate__animated animate__fadeInUp" data-wow-duration="1.25s">
@@ -73,11 +47,29 @@ const CPMint: React.FC<Props> = ({ totalSupply, cost, fetchContractInfo, mintBut
                             <div className="get__footer wow animate__animated animate__fadeInUp" data-wow-duration="1.25s">
                                 <div>
                                     <div><img src="img/img-get-toggle.png" srcSet="img/img-get-toggle@2x.png" alt="" /></div>
-                                    <p>{cost}</p><span>per NFT</span>
+                                    {/* <p>{cost}</p><span>per NFT</span> */}
+                                    <p>{cost}<span>per NFT</span></p>
+                                </div>
+                                <div><img src="img/path-line-vertical.png" srcSet="img/path-line-vertical@2x.png 2x" alt="" /></div>
+                                <div>
+                                    {/* <div className="c-btn__wrapper"><a className="c-btn" href="/">
+                                        <u className="c-btn__mask">Connect Wallet</u><span>Connect Wallet</span></a></div> */}
+                                    <div className="allTime">
+                                        <div className="days" />
+                                        <p>:</p>
+                                        <div className="hrs" />
+                                        <p>:</p>
+                                        <div className="min" />
+                                        <p>:</p>
+                                        <div className="sec" />
+                                    </div>
                                 </div>
                                 <div>
+                                    {/* <div className="c-btn__wrapper"><a className="c-btn" href="#" disabled="disabled">
+                                        <u className="c-btn__mask">Mint NOW</u><span>Mint NOW</span></a></div> */}
                                     <div className="c-btn__wrapper">
                                         <MintButton onClick={buttonHandler} className="c-btn" name="button 1">
+                                            {/* <u className="c-btn__mask">{account ? 'Mint Now' : 'Connect Wallet'}</u><span>{account ? 'Mint Now' : 'Connect Wallet'}</span> */}
                                             <u className="c-btn__mask">{mintButtonCaption}</u><span>{mintButtonCaption}</span>
                                         </MintButton>
                                         {/* <button className="c-btn" onClick={divClickedHandler}>
@@ -90,6 +82,8 @@ const CPMint: React.FC<Props> = ({ totalSupply, cost, fetchContractInfo, mintBut
                     </div>
                 </div>
             </div>
+            <AccountModal isOpen={isOpen} onClose={onClose} />
+
         </section >
     )
 }

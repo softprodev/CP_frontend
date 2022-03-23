@@ -555,23 +555,6 @@ const NemesisImg = styled.img`
   }
 `;
 
-const BestFriendOuterBox = styled.div`
-
-  display: contents';
-mt='8px' alignItems='center' display='contents'
-  // // background: rgba(79, 219, 250, 0.11);
-  // color: #01CBF3;
-  // font-family: 'Rowdies';
-  // font-weight: normal;
-  // font-style: normal;
-  // font-size: 14px;
-  // line-height: 18px;
-  // height: 36px;
-  // margin-top: -2px;
-  // margin-left: -2px;
-  // margin-right: -2px;
-`;
-
 const BestFriendContent = styled(Flex)`
   // background: rgba(79, 219, 250, 0.11);
   color: #01CBF3;
@@ -658,26 +641,6 @@ const AttributeContainer = styled(Flex) <{ index: number }>`
   }
 `;
 
-
-const BestFriendAttributeContainer = styled(Flex) <{ index: number }>`
-  div {
-    font-family: 'Rowdies';
-    font-weight: normal;
-    font-style: normal;
-    padding: 8px;
-    display: block;
-    justify-content: center;
-    background: ${({ index }) => index % 2 !== 0 && '#ECFBFE'};
-  }
-  // .type {
-  //   color: #00C0E6;
-  //   width: 45%;
-  //   border-right: 2px solid #4FDBFA;
-  // }
-  .value {
-    width: 55%;
-  }
-`;
 
 // const MarketplaceText = styled(Text)`
 //   color: #9D7EFF;

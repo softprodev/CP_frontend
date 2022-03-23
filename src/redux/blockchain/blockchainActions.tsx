@@ -35,8 +35,6 @@ const updateAccountRequest = (payload) => {
 
 export const connect = () => {
     return async (dispatch) => {
-        console.log("connect start");
-
         dispatch(connectRequest());
         const abiResponse = await fetch("/config/abi.json", {
             headers: {
@@ -51,19 +49,13 @@ export const connect = () => {
                 Accept: "application/json",
             },
         });
-
-        console.log("connect start", configResponse);
-
         const CONFIG = await configResponse.json();
+
         const { ethereum } = window;
         const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
 
-        console.log("connect start metamask", metamaskIsInstalled);
-
         if (metamaskIsInstalled) {
             const web3 = new Web3(ethereum);
-
-            console.log("connect start web3", web3);
 
             web3.setProvider(ethereum);
 
@@ -78,10 +70,6 @@ export const connect = () => {
                     method: "net_version",
                 });
 
-
-                console.log("Network ID", networkId);
-                console.log("Network ID config", CONFIG.NETWORK.ID);
-
                 if (networkId.toString() === CONFIG.NETWORK.ID.toString()) {
                     console.log("Network ID matched");
 
@@ -89,8 +77,6 @@ export const connect = () => {
                         abi,
                         CONFIG.CONTRACT_ADDRESS
                     );
-
-                    console.log("connect start SmartContractObj", SmartContractObj);
 
                     dispatch(
                         connectSuccess({
@@ -100,14 +86,8 @@ export const connect = () => {
                         })
                     );
 
-                    console.log("connect start account, ", accounts[0]);
-
-
                     // Add listeners start
                     ethereum.on("accountsChanged", (accountsChanged) => {
-                        console.log("connect start updatedaccounts, ", accountsChanged);
-                        console.log("connect start updatedaccounts, ", accountsChanged[0]);
-
                         dispatch(updateAccount(accountsChanged[0]));
                     });
                     ethereum.on("chainChanged", () => {
@@ -128,7 +108,6 @@ export const connect = () => {
 
 export const updateAccount = (account) => {
     return async (dispatch) => {
-        console.log("Update account");
         dispatch(updateAccountRequest({ account }));
         dispatch(fetchData());
     };

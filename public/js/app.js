@@ -46,55 +46,55 @@
           };
         }();
 
-  /* harmony default export */ __webpack_exports__["default"] = (Common);
+/* harmony default export */ __webpack_exports__["default"] = (Common);
 
         /***/
-})
+      })
 
     /******/
-});
-  /************************************************************************/
-  /******/ 	// The module cache
-  /******/ 	var __webpack_module_cache__ = {};
-  /******/
-  /******/ 	// The require function
-  /******/ 	function __webpack_require__(moduleId) {
-  /******/ 		// Check if module is in cache
-  /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-  /******/ 		if (cachedModule !== undefined) {
-  /******/ 			return cachedModule.exports;
+  });
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
       /******/
-}
-  /******/ 		// Create a new module (and put it into the cache)
-  /******/ 		var module = __webpack_module_cache__[moduleId] = {
-  /******/ 			// no module.id needed
-  /******/ 			// no module.loaded needed
-  /******/ 			exports: {}
+    }
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
       /******/
-};
-  /******/
-  /******/ 		// Execute the module function
-  /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-  /******/
-  /******/ 		// Return the exports of the module
-  /******/ 		return module.exports;
+    };
+/******/
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
     /******/
-}
-  /******/
-  /************************************************************************/
-  /******/ 	/* webpack/runtime/make namespace object */
-  /******/ 	!function () {
-  /******/ 		// define __esModule on exports
-  /******/ 		__webpack_require__.r = function (exports) {
-  /******/ 			if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-  /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+  }
+/******/
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	!function () {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = function (exports) {
+/******/ 			if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
         /******/
-}
-  /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+      }
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
       /******/
-};
+    };
     /******/
-}();
+  }();
   /******/
   /************************************************************************/
   var __webpack_exports__ = {};
@@ -104,7 +104,7 @@
       !*** ./src/js/app.js ***!
       \***********************/
     __webpack_require__.r(__webpack_exports__);
-  /* harmony import */ var _common_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/common */ "./src/js/common/common.js");
+/* harmony import */ var _common_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common/common */ "./src/js/common/common.js");
     // EVENT LISTENER - LOAD
     // ========================================
 
@@ -363,6 +363,33 @@
       customCursor();
       hamburgerMenu();
       wowScrollAnimation();
+      var daysBox = document.querySelector(".days");
+      var hrsBox = document.querySelector(".hrs");
+      var minBox = document.querySelector(".min");
+      var secBox = document.querySelector(".sec");
+      var countDownDate = new Date("Mar 22, 2022 21:00:00 GMT").getTime(); // COUNT DOWN FUNCTION
+
+      var x = setInterval(function () {
+        // GET DATE
+        var now = new Date().getTime(); // TIME BETWEEN NOW AND DATE
+
+        var distance = countDownDate - now; // CALCULATION TIME
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+        var minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
+        var seconds = Math.floor(distance % (1000 * 60) / 1000);
+        daysBox.innerHTML = days < 10 ? '0' + days + "<span>Days</span>" : days + "<span>Days</span>";
+        hrsBox.innerHTML = hours < 10 ? '0' + hours + "<span>Hrs</span>" : hours + "<span>Hrs</span>";
+        minBox.innerHTML = minutes < 10 ? '0' + minutes + "<span>Min</span>" : minutes + "<span>Min</span>";
+        secBox.innerHTML = seconds < 10 ? '0' + seconds + "<span>Sec</span>" : seconds + "<span>Sec</span>"; // IF FINISH
+
+        if (distance < 0) {
+          clearInterval(x);
+          document.querySelectorAll('.get__footer > div')[2].style.display = 'none';
+          document.querySelector('.get__footer .c-btn').removeAttribute('disabled');
+        }
+      }, 1000);
     }, false); // EVENT LISTENER - SCROLL
     // ========================================
 

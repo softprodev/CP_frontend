@@ -16,7 +16,7 @@ import {
   StyledPage, Section, BackgroundImage, Wrapper, MintWrapper,
   EggsContainer, EggImg, Egg2Img, Egg3Img, PuffiesCountText, PuffiesMintedText, RarityContainer, PuggleButton,
   PlusMinusButton, PuffyPerPrice, PuffyPlayer, PuffyPrice, LogoImg, CollectionText, CountDownContainer,
-  PuffyPartyImg, PuffyGoImg, PuffyPartyShadowImg, PuffyPartyText, PlayerImg, PartySection, EggQuestionText,
+  PuffyPartyImg, PuffyGoImg, PuffyPartyShadowImg, PuffyPartyText, PartySection, EggQuestionText,
   SliderContainer, SliderImage, GoldenTicketButton, GoldenTicketImg, ActionButtonsWrapper, PuffiesContainer
 } from './MintPuffiesUI'
 import MintingPhaseModal from './MintingPhaseModal';

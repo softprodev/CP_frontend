@@ -1,5 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState, useCallback } from 'react'
 import { Router, Route, Switch, useLocation } from 'react-router-dom'
+import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
+
 
 import truncateEthAddress from 'truncate-eth-address'
 
@@ -11,16 +13,20 @@ import CurrentBlockWrapper from 'components/CurrentBlockWrapper'
 import Header from 'components/Header'
 import usePersistConnect from 'hooks/usePersistConnect'
 
-import WAValidator from 'wallet-address-validator'
-
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from 'redux/store'
+import { useEthers, useEtherBalance } from "@usedapp/core";
+
 import { connect } from "./redux/blockchain/blockchainActions";
 import fetchData from "./redux/data/dataActions";
 
 import history from './routerHistory'
 // import config from 'components/Header/config'
 
+import AccountModal from "./components/AccountModal";
+
+
+import Layout from "./components/Layout";
 
 
 const MintPuffies = lazy(() => import('./views/MintPuffies'))
@@ -46,8 +52,8 @@ const ScrollToTop = () => {
 }
 
 
-const truncate = (input, len) =>
-  input.length > len ? `${input.substring(0, len)}...` : input;
+// const truncate = (input, len) =>
+//   input.length > len ? `${input.substring(0, len)}...` : input;
 
 const App: React.FC = () => {
 
@@ -55,8 +61,15 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const blockchain = useSelector((state: RootState) => state.blockchain);
   const data = useSelector((state: RootState) => state.data);
+  const [initialLoad, setInitialLoad] = useState(true)
+
+  const { activateBrowserWallet, account } = useEthers();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+
+
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [walletButtonCaption, setWalletButtonCaption] = useState(`Connect Wallet`);
   const [mintButtonCaption, setMintButtonCaption] = useState(`Connect Wallet`);
   const [mintAmount, setMintAmount] = useState(1);
@@ -86,7 +99,7 @@ const App: React.FC = () => {
     const totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
+    setMintButtonCaption("Minting Now");
     console.log(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
 
@@ -102,37 +115,21 @@ const App: React.FC = () => {
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
         console.log("Sorry, something went wrong please try again later.");
+        setMintButtonCaption("Mint Now");
+        alert("Sorry, something went wrong please try again later.");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
-        setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-        );
         console.log(
           `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
+        setMintButtonCaption("Mint Now");
+        alert(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit https://opensea.io/collection/club-physique to view it.`);
         setClaimingNft(false);
         dispatch(fetchData());
       });
-  };
-
-  const decrementMintAmount = () => {
-    let newMintAmount = mintAmount - 1;
-    if (newMintAmount < 1) {
-      newMintAmount = 1;
-    }
-    setMintAmount(newMintAmount);
-  };
-
-  const incrementMintAmount = () => {
-    let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
-    }
-    setMintAmount(newMintAmount);
   };
 
 
@@ -166,19 +163,28 @@ const App: React.FC = () => {
   // };
 
   const getConfig = async () => {
+    console.log("set config1");
+
     const configResponse = await fetch("/config/config.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     });
+    console.log("set config2", configResponse);
+
     const config = await configResponse.json();
+    console.log("set config", config);
     SET_CONFIG(config);
   };
 
+  // useEffect(() => {
+  //   getConfig();
+  // });
+
   useEffect(() => {
     getConfig();
-  });
+  }, []);
 
   useEffect(() => {
     console.log("useEffect");
@@ -222,6 +228,15 @@ const App: React.FC = () => {
 
   }, [blockchain, getData]);
 
+  // const fetchContractData = () => {
+  //   dispatch(connect());
+  //   getData();
+  // };
+
+  // useEffect(() => {
+  //   console.log("Just called one time.");
+  //   fetchContractData();
+  // }, [])
 
   useFetchPublicData()
   usePersistConnect()
@@ -231,7 +246,8 @@ const App: React.FC = () => {
     <Router history={history}>
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
-        <Header walletConnection={walletConnection} walletButtonCaption={walletButtonCaption} />
+        <Header walletConnection={walletConnection} walletButtonCaption={walletButtonCaption} handleOpenModal={onOpen} />
+
         <BackgroundImage />
         <Switch>
           <Route path="/" exact>
@@ -257,7 +273,11 @@ const App: React.FC = () => {
             <MyPuffies />
           </Route>
           <Route component={NotFound} />
+
         </Switch>
+        <Layout>
+          <AccountModal isOpen={isOpen} onClose={onClose} />
+        </Layout>
       </Suspense>
       <CurrentBlockWrapper />
     </Router>
